@@ -1,0 +1,12 @@
+{
+    "usuarios": 120,
+    "vendas": 4500,
+    "visitantes": 3200,
+    "escolas": 185,
+    "mensal": {
+        "meses": ["Janeiro", "Fevereiro", "Março", "Abril", "Maio"],
+        "vendas": [12, 19, 3, 5, 2],
+        "visitantes": [30, 20, 50, 40, 60],
+        "escolas":[48,36,15,20,22,63]
+    }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Cidades</a></li>
+            <li><a href="#">Escolas</a></li>
+            <li><a href="#">Relatórios</a></li>
+            <li><a href="#">Configurações</a></li>
+            
+        </ul>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Dashboard</h1>
+        </header>
+        <section class="cards">
+            <div class="card" id="usuarios-card">
+                <h3>Usuários</h3>
+                <p id="usuarios-count"></p>
+            </div>
+            <div class="card" id="vendas-card">
+                <h3>Vendas</h3>
+                <p id="vendas-count"></p>
+            </div>
+            <div class="card" id="visitantes-card">
+                <h3>Visitantes</h3>
+                <p id="visitantes-count"></p>
+            </div>
+        </section>
+        <section class="charts">
+            <div>
+                <canvas id="chart1"></canvas>
+            </div>
+            <div>
+                <canvas id="chart2"></canvas>
+            </div>
+            <div>
+                <canvas id="chart3"></canvas>
+            </div>
+        </section>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
