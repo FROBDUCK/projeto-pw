@@ -1,4 +1,8 @@
+const selectEstados = document.getElementById("selectEstados");
 const API_URL = "https://parseapi.back4app.com/classes/dadosWeb";
+
+let chart1;
+let chart2;
 
 // Configuração da requisição
 const config = {
@@ -30,6 +34,13 @@ const getCount = async (query) => {
 
 // Função para criar gráfico
 async function createChart() {
+  console.log("entrou em createChar");
+  if (chart1) {
+    chart1.destroy();
+  }
+  if (chart2) {
+    chart2.destroy();
+  }
   const dataAguaPotavel = await getCount({ AGUA_POTAVEL: 1 });
   const dataSemAguaPotavel = await getCount({ AGUA_POTAVEL: 0 });
   const aguaPotavelData = [dataAguaPotavel, dataSemAguaPotavel];
@@ -40,8 +51,8 @@ async function createChart() {
 
   // Crie os gráficos
   var ctx1 = document.getElementById("chart1").getContext("2d");
-  var chart1 = new Chart(ctx1, {
-    type: "pie",
+  chart1 = new Chart(ctx1, {
+    type: "bar",
     data: {
       labels: ["Com água potável", "Sem água potável"],
       datasets: [
@@ -66,19 +77,31 @@ async function createChart() {
     },
   });
 
-  const dataAguaPotavelMA = await getCount({ AGUA_POTAVEL: 1, UF: "MA" });
-  const dataSemAguaPotavelMA = await getCount({ AGUA_POTAVEL: 0, UF: "MA" });
-  const aguaPotavelDataMA = [dataAguaPotavelMA, dataSemAguaPotavelMA];
+  // pegar o que está selecionado
+  const estadoSelecionado = selectEstados.value;
+  console.log("estadoSelecionado", estadoSelecionado);
+  const dataAguaPotavelEstSelec = await getCount({
+    AGUA_POTAVEL: 1,
+    UF: estadoSelecionado,
+  });
+  const dataSemAguaPotavelEstSelec = await getCount({
+    AGUA_POTAVEL: 0,
+    UF: estadoSelecionado,
+  });
+  const aguaPotavelDataEstSelec = [
+    dataAguaPotavelEstSelec,
+    dataSemAguaPotavelEstSelec,
+  ];
 
   var ctx2 = document.getElementById("chart2").getContext("2d");
-  var chart2 = new Chart(ctx2, {
+  chart2 = new Chart(ctx2, {
     type: "pie",
     data: {
       labels: ["Com água potável", "Sem água potável"],
       datasets: [
         {
           label: "Água potável",
-          data: aguaPotavelDataMA,
+          data: aguaPotavelDataEstSelec,
           backgroundColor: [
             "rgba(75, 192, 192, 0.2)",
             "rgba(0, 100, 192, 0.2)",
@@ -99,3 +122,4 @@ async function createChart() {
 }
 
 window.onload = createChart;
+selectEstados.onchange = createChart;
