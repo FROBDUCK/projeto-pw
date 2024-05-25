@@ -1,56 +1,101 @@
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('data.json')
-        .then(response => response.json())
-        .then(data => {
-            // Atualize os contadores dos cartões
-            document.getElementById('usuarios-count').textContent = data.usuarios;
-            document.getElementById('vendas-count').textContent = `R$ ${data.vendas}`;
-            document.getElementById('visitantes-count').textContent = data.visitantes;
+const API_URL = "https://parseapi.back4app.com/classes/dadosWeb";
 
-            // Crie os gráficos
-            var ctx1 = document.getElementById('chart1').getContext('2d');
-            var chart1 = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: data.mensal.meses,
-                    datasets: [{
-                        label: 'Vendas',
-                        data: data.mensal.vendas,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
+// Configuração da requisição
+const config = {
+  headers: {
+    "X-Parse-Application-Id": "HVYd0xlML8xGdfLGqSjE5up02GK8ALADhExuQDJA",
+    "X-Parse-REST-API-Key": "iUQckbckYqInLFGWmdoHH42n2yNeEvIQhWlldzXt",
+  },
+};
 
-            var ctx2 = document.getElementById('chart2').getContext('2d');
-            var chart2 = new Chart(ctx2, {
-                type: 'line',
-                data: {
-                    labels: data.mensal.meses,
-                    datasets: [{
-                        label: 'Visitantes',
-                        data: data.mensal.visitantes,
-                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                        borderColor: 'rgba(153, 102, 255, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        })
-        .catch(error => console.error('Erro ao carregar o arquivo JSON:', error));
-});
+// Função para obter dados da API
+async function fetchData() {
+  const response = await fetch(API_URL, config);
+  const data = await response.json();
+  console.log("data", data);
+  return data.results;
+}
+
+const getCount = async (query) => {
+  let url = API_URL;
+  const whereClause = JSON.stringify(query);
+  url = `${url}?count=1&where=${whereClause}`;
+  url = encodeURI(url);
+  console.log("url", url);
+  const response = await fetch(url, config);
+  const data = await response.json();
+  console.log("data count", data);
+  return data.count;
+};
+
+// Função para criar gráfico
+async function createChart() {
+  const dataAguaPotavel = await getCount({ AGUA_POTAVEL: 1 });
+  const dataSemAguaPotavel = await getCount({ AGUA_POTAVEL: 0 });
+  const aguaPotavelData = [dataAguaPotavel, dataSemAguaPotavel];
+
+  // Processar os dados conforme necessário
+  // const labels = data.map((item) => item.MUNICIPIO);
+  // const values = data.map((item) => item.AGUA_POTAVEL);
+
+  // Crie os gráficos
+  var ctx1 = document.getElementById("chart1").getContext("2d");
+  var chart1 = new Chart(ctx1, {
+    type: "pie",
+    data: {
+      labels: ["Com água potável", "Sem água potável"],
+      datasets: [
+        {
+          label: "Água potável",
+          data: aguaPotavelData,
+          backgroundColor: [
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(0, 100, 192, 0.2)",
+          ],
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  const dataAguaPotavelMA = await getCount({ AGUA_POTAVEL: 1, UF: "MA" });
+  const dataSemAguaPotavelMA = await getCount({ AGUA_POTAVEL: 0, UF: "MA" });
+  const aguaPotavelDataMA = [dataAguaPotavelMA, dataSemAguaPotavelMA];
+
+  var ctx2 = document.getElementById("chart2").getContext("2d");
+  var chart2 = new Chart(ctx2, {
+    type: "pie",
+    data: {
+      labels: ["Com água potável", "Sem água potável"],
+      datasets: [
+        {
+          label: "Água potável",
+          data: aguaPotavelDataMA,
+          backgroundColor: [
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(0, 100, 192, 0.2)",
+          ],
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+window.onload = createChart;
