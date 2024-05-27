@@ -13,34 +13,45 @@
       <h2>Menu</h2>
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#">Cidades</a></li>
+        <li><a href="#">Estados</a></li>
         <li><a href="#">Escolas</a></li>
         <li><a href="#">Relatórios</a></li>
         <li><a href="#">Configurações</a></li>
       </ul>
     </div>
-    <select id="selectEstados">
+    <!--<select id="selectEstados">
       <option value="PE">PE</option>
       <option value="MA">MA</option>
-    </select>
+    </select>-->
     <div class="main-content">
       <header>
-        <h1>Dashboard</h1>
+        <h1>Consulta Dados do INEP - Dashboard</h1>
       </header>
       <section class="cards">
         <div class="card" id="usuarios-card">
-          <h3>Usuários</h3>
+          <h3>ESCOLAS COM FORNECIMENTO DE ÁGUA POTÁVEL</h3>
           <p id="usuarios-count"></p>
         </div>
         <div class="card" id="vendas-card">
-          <h3>Vendas</h3>
+          <h3>ESCOLAS COM FORNECIMENTO DE ENERGIA ELÉTRICA</h3>
           <p id="vendas-count"></p>
         </div>
         <div class="card" id="visitantes-card">
-          <h3>Visitantes</h3>
+          <h3>ESCOLAS COM REDE SANEAMENTO</h3>
           <p id="visitantes-count"></p>
         </div>
-      </section>
+      </section><br>
+      <select id="selectEstados">
+        <option value="PE">AL</option>
+        <option value="MA">BA</option>
+        <option value="PE">CE</option>
+        <option value="MA">MA</option>
+        <option value="PE">PB</option>
+        <option value="MA">PE</option>
+        <option value="PE">PI</option>
+        <option value="MA">RN</option>
+        <option value="PE">SE</option>
+      </select>
       <section class="charts">
         <div>
           <canvas id="chart1"></canvas>
@@ -50,6 +61,9 @@
         </div>
         <div>
           <canvas id="chart3"></canvas>
+        </div>
+        <div>
+          <canvas id="chart4"></canvas>
         </div>
       </section>
     </div>
