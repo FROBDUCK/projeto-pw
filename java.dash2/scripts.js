@@ -59,7 +59,7 @@ async function createChart() {
             labels: ["Com água potável", "Sem água potável"],
             datasets: [
                 {
-                    label: "Água potável",
+                    label: "Água potável: Região",
                     data: aguaPotavelData,
                     backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(0, 100, 192, 0.2)"],
                     borderColor: ["rgba(75, 192, 192, 1)", "rgba(0, 100, 192, 1)"],
@@ -88,7 +88,7 @@ async function createChart() {
             labels: ["Com água potável", "Sem água potável"],
             datasets: [
                 {
-                    label: "Água potável no estado selecionado",
+                    label: "Água potável: Estado",
                     data: aguaPotavelDataEstSelec,
                     backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(0, 100, 192, 0.2)"],
                     borderColor: ["rgba(75, 192, 192, 1)", "rgba(0, 100, 192, 1)"],
@@ -116,7 +116,7 @@ async function createChart() {
             labels: ["Com energia elétrica", "Sem energia elétrica"],
             datasets: [
                 {
-                    label: "Energia elétrica",
+                    label: "Energia elétrica: Regiao",
                     data: energiaEletricaData,
                     backgroundColor: ["rgba(255, 159, 64, 0.2)", "rgba(255, 99, 132, 0.2)"],
                     borderColor: ["rgba(255, 159, 64, 1)", "rgba(255, 99, 132, 1)"],
@@ -144,7 +144,7 @@ async function createChart() {
             labels: ["Com energia elétrica", "Sem energia elétrica"],
             datasets: [
                 {
-                    label: "Energia elétrica no estado selecionado",
+                    label: "Energia elétrica: Estado",
                     data: energiaEletricaDataEstSelec,
                     backgroundColor: ["rgba(255, 159, 64, 0.2)", "rgba(255, 99, 132, 0.2)"],
                     borderColor: ["rgba(255, 159, 64, 1)", "rgba(255, 99, 132, 1)"],
@@ -172,7 +172,7 @@ async function createChart() {
             labels: ["Com esgoto", "Sem esgoto"],
             datasets: [
                 {
-                    label: "Esgoto",
+                    label: "Esgoto: Região",
                     data: esgotoData,
                     backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(75, 192, 192, 0.2)"],
                     borderColor: ["rgba(54, 162, 235, 1)", "rgba(75, 192, 192, 1)"],
@@ -200,7 +200,7 @@ async function createChart() {
             labels: ["Com esgoto", "Sem esgoto"],
             datasets: [
                 {
-                    label: "Esgoto no estado selecionado",
+                    label: "Esgoto: Estado",
                     data: esgotoDataEstSelec,
                     backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(75, 192, 192, 0.2)"],
                     borderColor: ["rgba(54, 162, 235, 1)", "rgba(75, 192, 192, 1)"],
