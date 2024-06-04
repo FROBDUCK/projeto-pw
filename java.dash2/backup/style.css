@@ -69,39 +69,3 @@ header {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-.g1 {
-    width: 200px;
-    height: 200px;
-}
-
-.g2 {
-    width: 200px;
-    height: 200px;
-}
-
-.g3 {
-    width: 200px;
-    height: 200px;
-}
-
-.g4 {
-    width: 200px;
-    height: 200px;
-}
-
-.g5 {
-    width: 200px;
-    height: 200px;
-}
-
-.g6 {
-    width: 200px;
-    height: 200px;
-}
-
-.selection{
-    height: 30px;
-    border-radius: 5px;
-    color: rgb(18, 18, 29);
-}
